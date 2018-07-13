@@ -4,7 +4,27 @@ data<-read.csv("Monthly_data.csv",header=T)
 
 data_w<-read.csv("Weekly_data.csv",header=T)
 
+data<-data[,-3]
+data<-data[,-4]
+data<-data[,-5]
+data<-data[,-11]
+data<-data[,-11]
+data<-data[-1,]
+data<-data[-1,]
+#data<-data[,-2]#결측값 제거
+#data<-data[-59,]
+#data<-data[-59,]
+data
 head(data)
+names(data)
+
+data_w<-data_w[,-5]
+data_w<-data_w[,-6]
+data_w<-data_w[,-7]
+data_w<-data_w[,-8]
+data_w<-data_w[,-9]
+data_w<-data_w[,-10]
+names(data_w)
 head(data_w)
 
 data[,1]
@@ -38,42 +58,34 @@ for (i in 1:length(day_w)) {
 }
 colnames(data_t)<-c(colnames(data),colnames(data_w))
 
+length(data[1,])
+length(data_w[1,])
 
-as.matrix(cbind(data[200,],data_w[200,]))
-data_w[200,]
 
-data[,3]
-?write.csv
-write.csv(data_t,file="total.csv")
+number_m<-0
+current_m<-1
+data_t<-matrix(NA,nrow=263,ncol=19)
+current_w<-1
+while(current_w<length(day_w)){
+ if(months(day_m[current_m])==months(day_w[current_w])){
+    number_m<-number_m+1
+    current_w<-current_w+1
+  }
+  else{
+    dif<-(data[current_m+1,-1]-data[current_m,-1])/number_m
+    first_value<-(data[current_m,-1]-((number_m*(number_m-1))/2)*dif)/number_m
+    for (same_m in number_m:1) {
+      data_t[(current_w-same_m),]<-as.matrix(cbind(data_w[(current_w-same_m),1],(first_value+(number_m-same_m)*dif),data_w[(current_w-same_m),-1]))
+    }
+    current_m<-current_m+1
+    number_m<-0
+  }
+}
+colnames(data_t)<-c("날짜",colnames(data[,-1]),colnames(data_w[,-1]))
+
+
 head(data_t)
 
-length(data_t[,1])
 
-data_t[262,]
-
-
-library("vars")
-
-head(data)
-data<-data[,-1]
-data<-data[,-2]
-data<-data[,-3]
-data<-data[,-4]
-data<-data[,-6]
-colnames(data)<-c("x1","y","x2","x3","x4")
-
-data<-data[,c("y","x1","x2","x3","x4")]
-data<-data[-250,]
-
-VARselect(data, lag.max = 8, type = "both")
-
-
-
-p1ct <- VAR(data, p = 2, type = "both")
-p1ct
-summary(p1ct, equation = "e")
-plot(p1ct, names = "e")
-
-predict(p1ct,n.ahead = 5)
-predict(p1ct)
+write.csv(data_t,file="test_total.csv")
 
