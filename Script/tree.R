@@ -1,4 +1,4 @@
-total <- read.csv('hohyun.csv',fileEncoding = 'CP949')
+total <- read.csv('/Users/statstics/Desktop/DataAnalysis/poscoAI/Data/hohyun.csv',fileEncoding = 'CP949')
 total
 head(total)
 library(tree)
