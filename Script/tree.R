@@ -15,6 +15,13 @@ plot(htree) + text(htree,pretty=T)
 htree
 
 
+library(rpart)
+hpart <- rpart(철광석_가격 ~ .,total, subset = train)
+plot(hpart) + text(hpart,pretty=T)
+
+library(party)
+
+
 # Random Forest
 library(randomForest)
 library(MASS)
