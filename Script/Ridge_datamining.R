@@ -3,11 +3,6 @@ data = na.omit(data)
 head(data)
 
 
-data<-data[,c(-1,-2)]
-
-colnames(data)<-c("y", colnames(data[,-1]))
-
-
 
 head(data)
 
