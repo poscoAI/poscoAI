@@ -1,0 +1,17 @@
+mimi <- read.csv('mimi.csv',fileEncoding = 'CP949')
+mimi1 <- read.csv('mimi1.csv',fileEncoding = 'CP949')
+mimi2 <- read.csv('mimi2.csv',fileEncoding = 'CP949')
+mimi3 <- read.csv('mimi3.csv',fileEncoding = 'CP949')
+mimi4 <- read.csv('mimi4.csv',fileEncoding = 'CP949')
+mimi5 <- read.csv('mimi5.csv',fileEncoding = 'CP949')
+mimi6 <- read.csv('mimi6.csv',fileEncoding = 'CP949')
+mimi7 <- read.csv('mimi7.csv',fileEncoding = 'CP949')
+mimi8 <- read.csv('mimi8.csv',fileEncoding = 'CP949')
+mimi9 <- read.csv('mimi9.csv',fileEncoding = 'CP949')
+mimi10 <- read.csv('mimi10.csv',fileEncoding = 'CP949')
+mimi11 <- read.csv('mimi11.csv',fileEncoding = 'CP949')
+
+mimi12 <- cbind(mimi,mimi1,mimi2,mimi3,mimi4,mimi5,mimi6,mimi7,mimi8,mimi9,mimi10,mimi11)
+
+write.csv(mimi12,file = "mimi_final.csv",fileEncoding = 'CP949')
+str(mimi12)
