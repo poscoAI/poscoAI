@@ -1,7 +1,7 @@
-total <- read.csv('/Users/statstics/Desktop/DataAnalysis/poscoAI/Data/2018_07_20_hohyun.csv',fileEncoding = 'CP949')
+total <- read.csv('/Users/statstics/Desktop/DataAnalysis/poscoAI/Data/2018_07_20_hohyun_final.csv',fileEncoding = 'CP949')
 head(total);tail(total)
 library(tree)
-total <- total[-183:-185,]
+total <- total[-185,]
 total <- total[,-1:-2]
 total <- total[,-2]
 total <- total[-181,]
