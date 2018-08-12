@@ -1,7 +1,7 @@
 setwd("C:/Users/jk000/Desktop/poscoAI/Data")
 
-data<-read.csv("2018_07_23_pred_final2.csv")
-
+data<-read.csv("yaya.csv",fileEncoding = 'CP949')
+dim(data)
 head(data)
 data<-data[,c(-1,-2)]
 
@@ -14,8 +14,8 @@ sum(is.na(data))
 
 # data<-na.omit(data)
 
-train<-data[1:182,]
-test<-data[183:187,]
+train<-data[1:181,]
+test<-data[182:186,]
 test
 
 train<-as.data.frame(train)
@@ -46,12 +46,13 @@ testMat = model.matrix(y~., data=test)
 grid = 10 ^ seq(10, -10, length=100)
 ridgeModel = cv.glmnet(trainMat, train[, "y"], alpha=0, 
                        lambda=grid)
-optLambda = ridgeModel$lambda.min
+optLambda = ridgeModel$lambda.min\
 optLambda
 summary(testMat)
 
 
 #Ridge MSE
+
 ridgePred = predict(ridgeModel, newx=testMat, s=optLambda)
 
 as.matrix(cbind(const=1,test))%*%coef(ridgeModel)
@@ -60,7 +61,7 @@ mean((data[test, ][, "y"] - ridgePred)^2)
 
 
 #Lasso Model
-lassoModel = cv.glmnet(trainMat, train[, "y"], alpha=1, 
+lassoModel = cv.glmnet(trainMat, train[, "y"], alpha=0.5, 
                        lambda=grid)
 optLambda = lassoModel$lambda.min
 optLambda
@@ -119,7 +120,7 @@ optLambda
 library(glmnet)
 #Test MSE - Lasso
 lassoPred = predict(lassoModel, newx=testMat, s=optLambda)
-# mean((data[test, ][, "y"] - lassoPred)^2)
+#mean((data[test, ][, "y"] - lassoPred)^2)
 
 lassoPred
 
